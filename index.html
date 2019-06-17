@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Briefing template</title>
+</head>
+
+<body>
+    <button id="schaar">Schaar</button>
+    <button id="steen">Steen</button>
+    <button id="papier">Papier</button>
+    <button id="computer">Computer</button>
+    <button id="reset">Reset</button>
+
+    <script>
+        var schaar = document.getElementById("schaar").addEventListener("click", btnSchaar);
+
+        function btnSchaar() {
+            document.getElementById("schaar").style.backgroundColor = "red";
+        }
+
+        var steen = document.getElementById("steen").addEventListener("click", btnSteen);
+
+        function btnSteen() {
+            document.getElementById("steen").style.backgroundColor = "green";
+        }
+
+        var papier = document.getElementById("papier").addEventListener("click", btnPapier);
+
+        function btnPapier() {
+            document.getElementById("papier").style.backgroundColor = "yellow";
+        }
+    </script>
+</body>
+
+</html>
