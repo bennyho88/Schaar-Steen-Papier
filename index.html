@@ -6,33 +6,154 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>Briefing template</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <button id="schaar">Schaar</button>
-    <button id="steen">Steen</button>
-    <button id="papier">Papier</button>
+    <header>
+        <h1>Rock Paper Scissors</h1>
+    </header>
+    <div class="score-board">
+        <div id="user-label" class="badge">user</div>
+        <div id="computer-label" class="badge">comp</div>
+        <span id="user-score">0</span> : <span id="computer-score">0</span>
+    </div>
+
+    <div class="result">
+        <p>paper covers rock. You win!</p>
+    </div>
+
+    <div class="container">
+        <div class="choices">
+            <div class="choice" id="r">
+                <img src="images/rock.png" alt="">
+            </div>
+        </div>
+        <div class="choices" id="p">
+            <div class="choice">
+                <img src="images/paper.png" alt="">
+            </div>
+        </div>
+        <div class="choices" id="s">
+            <div class="choice">
+                <img src="images/scissors.png" alt="">
+            </div>
+        </div>
+    </div>
+
+
+    <p id="action-message">Make your move</p>
+
+
+
     <button id="computer">Computer</button>
     <button id="reset">Reset</button>
 
     <script>
-        var schaar = document.getElementById("schaar").addEventListener("click", btnSchaar);
+        // video time 1:13
+        let userScore = 0;
+        let computerScore = 0;
 
-        function btnSchaar() {
-            document.getElementById("schaar").style.backgroundColor = "red";
+
+        const userScore_span = document.getElementById("user-score");
+        const computerScore_span = document.getElementById("computer-score");
+
+        const scoreBoard_div = document.querySelector(".score-board");
+        const result_p = document.querySelector(".result > p");
+        const rock_div = document.getElementById("r");
+        const paper_div = document.getElementById("p");
+        const scissors_div = document.getElementById("s");
+
+        function getComputerChoice() {
+            const choices = ['r', 'p', 's'];
+            const randomNumber = Math.floor(Math.random() * 3);
+            return choices[randomNumber];
         }
 
-        var steen = document.getElementById("steen").addEventListener("click", btnSteen);
-
-        function btnSteen() {
-            document.getElementById("steen").style.backgroundColor = "green";
+        function convertToWord(letter) {
+            if (letter === "r") return "Rock";
+            if (letter === "p") return "Paper";
+            return "Scissors"
         }
 
-        var papier = document.getElementById("papier").addEventListener("click", btnPapier);
+        console.log(getComputerChoice());
 
-        function btnPapier() {
-            document.getElementById("papier").style.backgroundColor = "yellow";
+        function win(userChoice, computerChoice) {
+            userScore++;
+            userScore_span.innerHTML = userScore;
+            computerScore_span.innterHTML = computerScore;
+            const smallUserWord = 'user'.fontsize(3).sub();
+            const smallCompWord = 'comp'.fontsize(3).sub();
+            result_p.innerHTML = convertToWord(userChoice) + smallUserWord + " beats " + convertToWord(computerChoice) +
+                smallCompWord + ". You win!";
         }
+
+        function lose(userChoice, computerChoice) {
+            computerScore++;
+            userScore_span.innerHTML = userScore;
+            computerScore_span.innterHTML = computerScore;
+            const smallUserWord = 'user'.fontsize(3).sub();
+            const smallCompWord = 'comp'.fontsize(3).sub();
+            result_p.innerHTML = convertToWord(userChoice) + smallUserWord + " loses to " + convertToWord(
+                    computerChoice) +
+                smallCompWord + ". You lost....";
+        }
+
+        function draw(userChoice, computerChoice) {
+            const smallUserWord = 'user'.fontsize(3).sub();
+            const smallCompWord = 'comp'.fontsize(3).sub();
+            result_p.innerHTML = convertToWord(userChoice) + smallUserWord + " equals " + convertToWord(
+                    computerChoice) +
+                smallCompWord + ". It's a draw!";
+        }
+
+        function game(userChoice) {
+            const computerChoice = getComputerChoice();
+            switch (userChoice + computerChoice) {
+                case "rs":
+                case "pr":
+                case "sp":
+                    win(userChoice, computerChoice);
+                    break;
+                case "rp":
+                case "ps":
+                case "sr":
+                    lose(userChoice, computerChoice);
+                    break;
+                case "rr":
+                case "pp":
+                case "ss":
+                    draw(userChoice, computerChoice);
+                    break;
+            };
+        };
+
+
+        function main() {
+            rock_div.addEventListener("click", btnRock);
+
+            function btnRock() {
+                game("r");
+
+            }
+
+            paper_div.addEventListener("click", btnPaper);
+
+            function btnPaper() {
+                game("p");
+
+            }
+
+            scissors_div.addEventListener("click", btnScissors);
+
+            function btnScissors() {
+                game("s");
+
+            }
+        }
+
+
+        main();
     </script>
 </body>
 
