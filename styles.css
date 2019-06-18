@@ -95,3 +95,13 @@ img {
   font-size: 20px;
   margin-top: 20px;
 }
+
+#reset {
+  display: inline-block;
+  padding: 10px 25px;
+  background-color: red;
+}
+
+.reset-container {
+  text-align: center;
+}
