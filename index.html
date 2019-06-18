@@ -62,6 +62,8 @@
         const rock_div = document.getElementById("r");
         const paper_div = document.getElementById("p");
         const scissors_div = document.getElementById("s");
+        const reset = document.getElementById("reset");
+
 
         function getComputerChoice() {
             const choices = ['r', 'p', 's'];
@@ -127,6 +129,18 @@
                     break;
             };
         };
+
+        //reset button
+
+
+        reset.addEventListener("click", resetBtn);
+
+        function resetBtn() {
+            userScore = 0;
+            computerScore = 0;
+            userScore_span.innerHTML = userScore;
+            computerScore_span.innerHTML = computerScore;
+        }
 
 
         function main() {
